@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 /**
  * @program: yeb
  * @description: 权限组
- * @author: Honors
+ * @author: zll
  * @create: 2021-07-16 16:01
  */
 @Api(value = "权限管理",tags = "权限管理")
@@ -91,9 +91,12 @@ public class PermissionController {
     }
 
     @ApiOperation("根据角色ID查找菜单ID")
-    @GetMapping("/mid/{rid}")
-    public List<Integer> getByIdMenus(@PathVariable Integer[] rid){
-        return menuRoleService.list(new QueryWrapper<MenuRole>().eq("rid",rid)).stream().map(MenuRole::getMid).collect(Collectors.toList());
+    @GetMapping("/mid")
+    public List<Integer> getByIdMenus(@RequestParam("rid") Long rid){
+        List<MenuRole> menuRoles = menuRoleService.list(new QueryWrapper<MenuRole>().eq("rid", rid));
+        Stream<Integer> integerStream = menuRoles.stream().map(MenuRole::getMid);
+        List<Integer> collect = integerStream.collect(Collectors.toList());
+        return collect;
     }
 
     @ApiOperation("更新角色菜单")
