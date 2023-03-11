@@ -100,5 +100,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return roleMapper.getRoles(adminId);
     }
 
+    @Override
+    public List<Admin> getAllAdmins(String keywords) {
+        return null;
+    }
+
 
 }

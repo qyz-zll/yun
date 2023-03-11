@@ -11,5 +11,28 @@
         <result column="enabled" property="enabled" />
         <result column="isParent" property="isParent" />
     </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, parentId, depPath, enabled, isParent
+    </sql>
+
+    <resultMap id="DepartmentWithChildren" type="com.zll.server.pojo.Department" extends="BaseResultMap">
+
+        <!--执行完getAllInFo语句后，children字段做特殊处理，子查询给该字段补充数据-->
+        <collection property="children" ofType="com.zll.server.pojo.Department"
+                    column="id"
+                    select="com.zll.server.mapper.DepartmentMapper.getAllDepartments">
+        </collection>
+    </resultMap>
+    <!--获取所有部门-->
+    <select id="getAllDepartments" resultMap="DepartmentWithChildren">
+        select
+            <include refid="Base_Column_List"/>
+        from t_department
+        where parentid = #{parentId}
+    </select>
+
+
+
 
 </mapper>

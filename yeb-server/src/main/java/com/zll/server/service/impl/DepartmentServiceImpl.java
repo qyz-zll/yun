@@ -4,7 +4,10 @@ import com.zll.server.pojo.Department;
 import com.zll.server.mapper.DepartmentMapper;
 import com.zll.server.service.IDepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +19,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Department> implements IDepartmentService {
-
+    @Autowired
+    private DepartmentMapper departmentMapper;
+    @Override
+    public List<Department> getAllDepartments() {
+        return departmentMapper.getAllDepartments(-1);
+    }
 }
