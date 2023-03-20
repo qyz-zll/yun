@@ -2,6 +2,7 @@ package com.zll.server.service.impl;
 
 import com.zll.server.pojo.Department;
 import com.zll.server.mapper.DepartmentMapper;
+import com.zll.server.pojo.RespBean;
 import com.zll.server.service.IDepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,15 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     @Override
     public List<Department> getAllDepartments() {
         return departmentMapper.getAllDepartments(-1);
+    }
+
+    @Override
+    public RespBean addDep(Department dep) {
+        dep.setEnabled(true);
+        departmentMapper.addDep(dep);
+        if (1==dep.getResult()){
+            return RespBean.success("成功添加",dep);
+        }
+        return RespBean.error("成功失败");
     }
 }

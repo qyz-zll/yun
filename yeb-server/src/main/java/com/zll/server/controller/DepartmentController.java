@@ -2,13 +2,11 @@ package com.zll.server.controller;
 
 
 import com.zll.server.pojo.Department;
+import com.zll.server.pojo.RespBean;
 import com.zll.server.service.IDepartmentService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +28,17 @@ public class DepartmentController {
     @GetMapping("/")
     public List<Department>getAllDepartments(){
         return departmentService.getAllDepartments();
+    }
+
+    @ApiOperation(value = "添加部门")
+    @PostMapping("/")
+    public RespBean addDep(@RequestBody Department dep){
+        return departmentService.addDep(dep);
+    }
+
+    @ApiOperation(value = "刪除部门")
+    @PostMapping("/")
+    public RespBean deleteDep(@RequestBody Department dep){
+        return departmentService.addDep(dep);
     }
 }

@@ -2,6 +2,7 @@ package com.zll.server.service;
 
 import com.zll.server.pojo.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zll.server.pojo.RespBean;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ import java.util.List;
 public interface IDepartmentService extends IService<Department> {
 
     List<Department> getAllDepartments();
+
+    RespBean addDep(Department dep);
 }

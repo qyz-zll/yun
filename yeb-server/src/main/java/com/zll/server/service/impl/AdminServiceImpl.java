@@ -5,6 +5,7 @@ import com.zll.server.config.security.component.JwtTokenUtil;
 import com.zll.server.mapper.RoleMapper;
 import com.zll.server.pojo.Admin;
 import com.zll.server.mapper.AdminMapper;
+import com.zll.server.pojo.Menu;
 import com.zll.server.pojo.RespBean;
 import com.zll.server.pojo.Role;
 import com.zll.server.service.IAdminService;
@@ -99,6 +100,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public List<Role> getRoles(Integer adminId) {
         return roleMapper.getRoles(adminId);
     }
+
+
 
     @Override
     public List<Admin> getAllAdmins(String keywords) {
