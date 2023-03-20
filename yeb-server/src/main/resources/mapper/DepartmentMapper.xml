@@ -15,6 +15,12 @@
     <sql id="Base_Column_List">
         id, name, parentId, depPath, enabled, isParent
     </sql>
+<!--    删除部门-->
+
+
+    <select id="deleteDep" statementType="CALLABLE">
+        call deleteDep(#{id,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
+    </select>
 
     <resultMap id="DepartmentWithChildren" type="com.zll.server.pojo.Department" extends="BaseResultMap">
 
@@ -37,8 +43,4 @@
         from t_department
         where parentid = #{parentId}
     </select>
-
-
-
-
 </mapper>

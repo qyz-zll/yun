@@ -1,6 +1,7 @@
 package com.zll.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.zll.server.AdminUtils;
 import com.zll.server.config.security.component.JwtTokenUtil;
 import com.zll.server.mapper.RoleMapper;
 import com.zll.server.pojo.Admin;
@@ -105,7 +106,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Override
     public List<Admin> getAllAdmins(String keywords) {
-        return null;
+        return adminMapper.getAllAdmins(AdminUtils.getCurrentAdmin().getId(),keywords);
     }
 
 

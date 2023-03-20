@@ -1,6 +1,7 @@
 package com.zll.server.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zll.server.AdminUtils;
 import com.zll.server.mapper.MenuMapper;
 import com.zll.server.pojo.Admin;
 import com.zll.server.pojo.Menu;
@@ -38,7 +39,14 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
      */
     @Override
     public List<Menu> getMenusByAdminId() {
-       return menuMapper.getMenusByAdminId(((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        Integer adminId = AdminUtils.getCurrentAdmin().getId();
+        ValueOperations<String,Object> valueOperations = redisTemplate.opsForValue();
+        List<Menu> menus = (List<Menu>) valueOperations.get("menu_" + adminId);
+        if (CollectionUtils.isEmpty(menus)){
+            menus = menuMapper.getMenusByAdminId(adminId);
+            valueOperations.set("menu_" + adminId,menus);
+        }
+        return menus;
     }
 
     /**

@@ -37,8 +37,8 @@ public class DepartmentController {
     }
 
     @ApiOperation(value = "刪除部门")
-    @PostMapping("/")
-    public RespBean deleteDep(@RequestBody Department dep){
-        return departmentService.addDep(dep);
+    @PostMapping("/{id}")
+    public RespBean deleteDep(@PathVariable Integer id){
+        return departmentService.deleteDep(id);
     }
 }

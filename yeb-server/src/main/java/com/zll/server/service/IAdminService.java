@@ -26,6 +26,6 @@ public interface IAdminService extends IService<Admin> {
 //    获取roles
     List<Role> getRoles(Integer adminId);
 
-
+//    获取操作员
     List<Admin> getAllAdmins(String keywords);
 }

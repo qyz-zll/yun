@@ -3,6 +3,7 @@ package com.zll.server.mapper;
 import com.zll.server.pojo.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zll.server.pojo.Menu;
+import io.lettuce.core.dynamic.annotation.Param;
 
 import java.util.List;
 
@@ -17,4 +18,5 @@ import java.util.List;
 public interface AdminMapper extends BaseMapper<Admin> {
 
 
+    List<Admin> getAllAdmins(@Param("id") Integer id,@Param("keywords") String keywords);
 }
