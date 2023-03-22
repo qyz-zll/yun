@@ -28,4 +28,6 @@ public interface IAdminService extends IService<Admin> {
 
 //    获取操作员
     List<Admin> getAllAdmins(String keywords);
+//    更新操作员角色
+    RespBean updateAdminRole(Integer adminId, Integer[] rids);
 }

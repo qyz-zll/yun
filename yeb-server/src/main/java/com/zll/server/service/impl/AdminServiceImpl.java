@@ -3,12 +3,10 @@ package com.zll.server.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zll.server.AdminUtils;
 import com.zll.server.config.security.component.JwtTokenUtil;
+import com.zll.server.mapper.AdminRoleMapper;
 import com.zll.server.mapper.RoleMapper;
-import com.zll.server.pojo.Admin;
+import com.zll.server.pojo.*;
 import com.zll.server.mapper.AdminMapper;
-import com.zll.server.pojo.Menu;
-import com.zll.server.pojo.RespBean;
-import com.zll.server.pojo.Role;
 import com.zll.server.service.IAdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.SneakyThrows;
@@ -48,6 +46,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private String tokenHead;
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private AdminRoleMapper adminRoleMapper;
 
 
     private List<com.zll.server.pojo.Role> Role;
@@ -107,6 +107,17 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public List<Admin> getAllAdmins(String keywords) {
         return adminMapper.getAllAdmins(AdminUtils.getCurrentAdmin().getId(),keywords);
+    }
+
+    @Override
+    public RespBean updateAdminRole(Integer adminId, Integer[] rids) {
+        adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("adminId",adminId));
+
+        Integer result =  adminRoleMapper.addAdminRole(adminId,rids);
+        if (rids.length == result){
+            return RespBean.success("更新成功");
+        }
+        return RespBean.error("更新成功");
     }
 
 

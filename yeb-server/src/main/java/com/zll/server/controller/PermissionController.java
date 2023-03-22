@@ -91,8 +91,8 @@ public class PermissionController {
     }
 
     @ApiOperation("根据角色ID查找菜单ID")
-    @GetMapping("/mid")
-    public List<Integer> getByIdMenus(@RequestParam("rid") Long rid){
+    @GetMapping("/mid/{rid}")
+    public List<Integer> getByIdMenus(@PathVariable Integer rid) {
         List<MenuRole> menuRoles = menuRoleService.list(new QueryWrapper<MenuRole>().eq("rid", rid));
         Stream<Integer> integerStream = menuRoles.stream().map(MenuRole::getMid);
         List<Integer> collect = integerStream.collect(Collectors.toList());
